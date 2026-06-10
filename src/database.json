@@ -1,0 +1,202 @@
+{
+  "profile": {
+    "name": "Munaim Khan",
+    "title": "Full-Stack Web Developer",
+    "avatar": "/src/images/profile.png",
+    "bio": "Building modern web applications with Next.js, React.js, Node.js, Laravel, and MongoDB. Passionate about solving real-world problems through clean code and intuitive user experiences.",
+    "location": "Chattogram, BD",
+    "email": "khanmail2599@gmail.com",
+    "github": "https://github.com/munaimpro",
+    "linkedin": "https://linkedin.com/in/munaimpro"
+  },
+  "about": {
+    "narrative": [
+      "I build modern web applications that balance performance, scalability, and user experience.",
+      "By combining frontend creativity with backend engineering, I transform ideas into reliable digital products that deliver real value."
+    ],
+    "skills": [
+      {
+        "id": "s1",
+        "name": "React / Vite / NextJS",
+        "level": 95,
+        "category": "Frontend"
+      },
+      {
+        "id": "s2",
+        "name": "Tailwind CSS & Canvas",
+        "level": 98,
+        "category": "Design"
+      },
+      {
+        "id": "s3",
+        "name": "Express & Node JS",
+        "level": 92,
+        "category": "Backend"
+      },
+      {
+        "id": "s4",
+        "name": "MongoDB / Mongoose",
+        "level": 89,
+        "category": "Database"
+      },
+
+      {
+        "id": "s6",
+        "name": "API Design & REST",
+        "level": 94,
+        "category": "Backend"
+      },
+      {
+        "id": "s7",
+        "name": "PHP",
+        "level": 90,
+        "category": "Backend"
+      },
+      {
+        "id": "s7.1",
+        "name": "Laravel",
+        "level": 90,
+        "category": "Backend"
+      },
+      {
+        "id": "s8",
+        "name": "MySQL",
+        "level": 90,
+        "category": "Database"
+      },
+      {
+        "id": "s9",
+        "name": "Bootstrap",
+        "level": 90,
+        "category": "Frontend"
+      },
+      {
+        "id": "s10",
+        "name": "DaisyUI",
+        "level": 85,
+        "category": "Design"
+      },
+      {
+        "id": "s11",
+        "name": "HeroUI",
+        "level": 90,
+        "category": "Frontend"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Idea Vault",
+      "subtitle": "Startup Idea Sharing Platform",
+      "description": "A dynamic platform for entrepreneurs to share, track, and discuss startup concepts.",
+      "technologies": [
+        "React.js",
+        "Next.js",
+        "Express.js",
+        "Tailwind CSS",
+        "Recharts"
+      ],
+      "features": [
+        "Full CRUD operations for idea management",
+        "Secure authentication",
+        "Interactive comment system",
+        "Engagement/interaction tracking",
+        "Seamless dark mode support"
+      ],
+      "challenges": "Implementing real-time interaction tracking without sacrificing performance.",
+      "solutions": "Utilized efficient state management and optimized database queries.",
+      "image": "https://i.ibb.co.com/dwbBF18q/ideavault.png",
+      "github": "https://github.com/munaimpro/idea-vault",
+      "liveUrl": "https://idea-vault-munaimpro-updated.vercel.app"
+    },
+    {
+      "id": "proj-2",
+      "title": "Online Job Portal - JobPulse",
+      "subtitle": "Web Application • 2024",
+      "description": "A comprehensive C2C property rental platform featuring advanced user management, seamless booking system, intelligent property search with filters, and secure payment integration.",
+      "technologies": [
+        "PHP",
+        "MySQL",
+        "Bootstrap",
+        "JavaScript"
+      ],
+      "features": [
+        "User management system",
+        "Booking and reservation functionality",
+        "Advanced property search",
+        "Payment gateway integration"
+      ],
+      "challenges": "Integrating a reliable payment gateway and ensuring real-time booking updates.",
+      "solutions": "Implemented webhook listeners for payment verification and utilized database transactions for atomic booking operations.",
+      "image": "https://github.com/munaimpro/online-job-portal/raw/main/online-job-portal-cover.png?raw=true",
+      "github": "https://github.com/munaimpro/online-job-portal"
+    },
+    {
+      "id": "proj-3",
+      "title": "SkillSphere",
+      "subtitle": "Online Learning Platform",
+      "description": "An intuitive educational platform focused on smooth course discovery and student profile tracking",
+      "technologies": [
+        "Next.js",
+        "Tailwind CSS",
+        "DaisyUI",
+        "Better Auth",
+        "React Hook Form"
+      ],
+      "features": [
+        "Google social login",
+        "Real-time course search by title",
+        "Dynamic ranking algorithms (Trending & Top-Rated sections)",
+        "Robust form validation"
+      ],
+      "challenges": "Handling dynamic ranking and ensuring secure social authentication.",
+      "solutions": "Deployed custom server-side ranking algorithms and implemented Better Auth library for robust security.",
+      "image": "https://i.ibb.co.com/20c0gJm3/skillsphere.png",
+      "github": "https://github.com/munaimpro/programming-hero-assignment-8",
+      "liveUrl": "https://skill-sphere-munaimpro.vercel.app"
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "degree": "Master of Science in Computer Science",
+      "institution": "Port City International University",
+      "year": "2023 - 2025",
+      "specialization": "Specialized in Web Development and Software Engineering."
+    },
+    {
+      "id": "edu-2",
+      "degree": "Bachelor of Scieence in Computer Science & Information Technology",
+      "institution": "Southern University, Bangladesh",
+      "year": "2017 - 2022",
+      "specialization": "Algorithms, Interface Systems & Human Centered Engineering"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "role": "Full-stack Web Developer",
+      "company": "ART-SoftIT",
+      "period": "2023 - 2025",
+      "description": "Led full-stack development projects using Laravel, PHP, and WordPress for various clients."
+    },
+    {
+      "id": "exp-2",
+      "role": "Freelance Laravel Developer",
+      "company": "kostokomai.com",
+      "period": "2024",
+      "description": "Developed a coupon system for the users of this E-commerce platform. Improved application security and performance. Engineered new core features, including a payment-integrated donation system and dynamic order tracking, enhancing overall user functionality."
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-1780599138124",
+      "name": "Raju Ahmed",
+      "email": "khanmail2599@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Test message from DeepSite",
+      "timestamp": "2026-06-04T18:52:18.124Z"
+    }
+  ]
+}

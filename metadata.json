@@ -1,0 +1,6 @@
+{
+  "name": "Personal Portfolio",
+  "description": "An outstanding modern glassmorphism portfolio featuring dynamic MongoDB JSON document view and interactive controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
