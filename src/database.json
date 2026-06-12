@@ -155,6 +155,30 @@
       "image": "https://i.ibb.co.com/20c0gJm3/skillsphere.png",
       "github": "https://github.com/munaimpro/programming-hero-assignment-8",
       "liveUrl": "https://skill-sphere-munaimpro.vercel.app"
+    },
+    {
+      "id": "proj-3",
+      "title": "SkillSphere",
+      "subtitle": "Online Learning Platform",
+      "description": "An intuitive educational platform focused on smooth course discovery and student profile tracking",
+      "technologies": [
+        "Next.js",
+        "Tailwind CSS",
+        "DaisyUI",
+        "Better Auth",
+        "React Hook Form"
+      ],
+      "features": [
+        "Google social login",
+        "Real-time course search by title",
+        "Dynamic ranking algorithms (Trending & Top-Rated sections)",
+        "Robust form validation"
+      ],
+      "challenges": "Handling dynamic ranking and ensuring secure social authentication.",
+      "solutions": "Deployed custom server-side ranking algorithms and implemented Better Auth library for robust security.",
+      "image": "https://i.ibb.co.com/20c0gJm3/skillsphere.png",
+      "github": "https://github.com/munaimpro/programming-hero-assignment-8",
+      "liveUrl": "https://skill-sphere-munaimpro.vercel.app"
     }
   ],
   "education": [
