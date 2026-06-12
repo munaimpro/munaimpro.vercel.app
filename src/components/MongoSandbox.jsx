@@ -92,14 +92,24 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
         payload[activeCollection] = parsedContent;
       }
 
-      const res = await fetch('/api/portfolio', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      let res;
+      let okState = false;
+      let responseData = {};
+      try {
+        res = await fetch('/api/portfolio', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          responseData = await res.json();
+          okState = true;
+        }
+      } catch (e) {
+        console.warn('POST /api/portfolio failed, falling back to local storage sync.', e);
+      }
 
-      const responseData = await res.json();
-      if (res.ok) {
+      if (okState) {
         setSaveStatus({ type: 'success', text: 'Collection Synced to Express database!' });
         
         // Notify parent App component to update live layout values immediately
@@ -107,7 +117,15 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
           onDataSynced(payload);
         }
       } else {
-        setSaveStatus({ type: 'error', text: responseData.error || 'Failed to edit database schema.' });
+        try {
+          localStorage.setItem('portfolio_data', JSON.stringify(payload));
+          setSaveStatus({ type: 'success', text: 'Collection Synced to local storage cache!' });
+          if (onDataSynced) {
+            onDataSynced(payload);
+          }
+        } catch (storageErr) {
+          setSaveStatus({ type: 'error', text: 'Local storage quota exceeded or unavailable.' });
+        }
       }
     } catch (ex) {
       setSaveStatus({ type: 'error', text: 'Fatal error parsing JSON layout attributes' });

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Database, Terminal, Cpu, ExternalLink } from 'lucide-react';
 import HomePage from './pages/index';
 import ProjectsPage from './pages/projects';
+import fallbackData from './database.json';
 
 export default function App() {
   const [data, setData] = useState(null);
@@ -26,9 +27,36 @@ export default function App() {
       }
       const json = await res.json();
       setData(json);
+      try {
+        localStorage.setItem('portfolio_data', JSON.stringify(json));
+      } catch (e) {
+        console.warn('Storage quota or storage access error:', e);
+      }
+      setError(null);
       setLoading(false);
     } catch (err) {
-      setError(err.message || 'Failed connecting to database port');
+      console.warn('Backend server database port query failed; falling back to client-saved state.');
+      
+      // Look up cached localStorage item
+      let localPayload = null;
+      try {
+        const cached = localStorage.getItem('portfolio_data');
+        if (cached) {
+          localPayload = JSON.parse(cached);
+        }
+      } catch (e) {
+        console.warn('Could not read from local storage cache:', e);
+      }
+
+      if (localPayload) {
+        setData(localPayload);
+        setError(null);
+      } else if (fallbackData) {
+        setData(fallbackData);
+        setError(null);
+      } else {
+        setError(err.message || 'Failed connecting to database port');
+      }
       setLoading(false);
     }
   };
