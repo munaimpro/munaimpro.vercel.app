@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import { MongoClient } from "mongodb";
 import { createServer as createViteServer } from "vite";
 
 async function startServer() {
@@ -10,28 +9,10 @@ async function startServer() {
 
   app.use(express.json());
 
-  // MongoDB setup
-  let mongoDb = null;
-  if (process.env.MONGODB_URI) {
-    try {
-      const client = new MongoClient(process.env.MONGODB_URI);
-      await client.connect();
-      mongoDb = client.db("portfolio_db"); // Default db
-      console.log("Connected to MongoDB!");
-    } catch (e) {
-      console.error("Failed to connect to MongoDB, falling back to JSON", e);
-    }
-  }
-
   const dbPath = path.join(process.cwd(), "src", "database.json");
 
   // Helper to read database
   async function readDatabase() {
-    if (mongoDb) {
-      const data = await mongoDb.collection("portfolio").findOne({ id: "main" });
-      if (data) return data;
-    }
-
     try {
       if (fs.existsSync(dbPath)) {
         const raw = fs.readFileSync(dbPath, "utf-8");
@@ -45,15 +26,7 @@ async function startServer() {
 
   // Helper to write database
   async function writeDatabase(data) {
-    if (mongoDb) {
-      await mongoDb.collection("portfolio").updateOne(
-        { id: "main" },
-        { $set: data },
-        { upsert: true }
-      );
-    } else {
-      fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), "utf-8");
-    }
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), "utf-8");
   }
 
   // API Routes
@@ -91,14 +64,10 @@ async function startServer() {
         timestamp: new Date().toISOString()
       };
 
-      if (mongoDb) {
-        await mongoDb.collection("messages").insertOne(newMsg);
-      } else {
-        const db = await readDatabase();
-        if (!db.messages) db.messages = [];
-        db.messages.unshift(newMsg);
-        await writeDatabase(db);
-      }
+      const db = await readDatabase();
+      if (!db.messages) db.messages = [];
+      db.messages.unshift(newMsg);
+      await writeDatabase(db);
 
       res.json({ success: true, message: "Message received!" });
     } catch (err) {

@@ -9,13 +9,20 @@ export default function ProjectsPage({ projects }) {
   
   const allTechnologies = useMemo(() => {
     const techs = new Set(['All']);
-    projects.forEach(p => p.technologies.forEach(t => techs.add(t)));
+    if (projects && Array.isArray(projects)) {
+      projects.forEach(p => {
+        if (p.technologies && Array.isArray(p.technologies)) {
+          p.technologies.forEach(t => techs.add(t));
+        }
+      });
+    }
     return Array.from(techs);
   }, [projects]);
 
   const filteredProjects = useMemo(() => {
+    if (!projects || !Array.isArray(projects)) return [];
     if (selectedTech === 'All') return projects;
-    return projects.filter(p => p.technologies.includes(selectedTech));
+    return projects.filter(p => p.technologies && p.technologies.includes(selectedTech));
   }, [projects, selectedTech]);
 
   const getProjectFeatures = (project) => {
@@ -124,7 +131,7 @@ export default function ProjectsPage({ projects }) {
                         ENGINE STACK
                       </span>
                       <div className="flex flex-wrap gap-1">
-                        {project.technologies.slice(0, 4).map((tech) => (
+                        {project.technologies && project.technologies.slice(0, 4).map((tech) => (
                           <span
                             key={tech}
                             className="px-2 py-0.5 rounded bg-white/5 text-[9px] font-mono text-slate-300 border border-white/5 uppercase"
@@ -132,7 +139,7 @@ export default function ProjectsPage({ projects }) {
                             {tech}
                           </span>
                         ))}
-                        {project.technologies.length > 4 && (
+                        {project.technologies && project.technologies.length > 4 && (
                           <span className="px-1.5 py-0.5 rounded bg-cyan-400/10 text-[9px] font-mono text-cyan-400 border border-cyan-400/20 uppercase font-semibold">
                             +{project.technologies.length - 4}
                           </span>

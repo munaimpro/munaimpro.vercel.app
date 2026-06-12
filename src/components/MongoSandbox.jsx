@@ -200,18 +200,18 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
             <div className="glassmorphism rounded-2xl p-5 border border-white/8 bg-slate-950/75 flex-1 flex flex-col justify-between text-left shadow-2xl">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-slate-500 uppercase">MongoDB Core Metrics</span>
+                  <span className="text-[10px] font-mono text-slate-500 uppercase">JSON Database Core Metrics</span>
                   <Database className="w-4 h-4 text-emerald-400" />
                 </div>
                 
                 <h3 className="font-display font-bold text-white text-lg tracking-tight leading-none">
-                  Cluster Status
+                  Database Status
                 </h3>
-
+ 
                 <div className="space-y-2.5 pt-2">
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className="text-slate-400">DBMS Engine:</span>
-                    <span className="text-emerald-400 font-bold">MongoDB v7.0 (Sim)</span>
+                    <span className="text-emerald-400 font-bold">Express JSON DB (Local)</span>
                   </div>
                   <div className="flex items-center justify-between text-xs font-mono">
                     <span className="text-slate-400">Total Documents:</span>
