@@ -7,7 +7,12 @@
     "location": "Chattogram, BD",
     "email": "khanmail2599@gmail.com",
     "github": "https://github.com/munaimpro",
-    "linkedin": "https://linkedin.com/in/munaimpro"
+    "linkedin": "https://linkedin.com/in/munaimpro",
+    "emailjs": {
+      "service_id": "service_rfpdsxy",
+      "template_id": "template_m203cdm",
+      "public_key": "tQSkILE1t-DRSkdSN"
+    }
   },
   "about": {
     "narrative": [
@@ -39,7 +44,6 @@
         "level": 89,
         "category": "Database"
       },
-
       {
         "id": "s6",
         "name": "API Design & REST",
@@ -155,30 +159,6 @@
       "image": "https://i.ibb.co.com/20c0gJm3/skillsphere.png",
       "github": "https://github.com/munaimpro/programming-hero-assignment-8",
       "liveUrl": "https://skill-sphere-munaimpro.vercel.app"
-    },
-    {
-      "id": "proj-3",
-      "title": "SkillSphere",
-      "subtitle": "Online Learning Platform",
-      "description": "An intuitive educational platform focused on smooth course discovery and student profile tracking",
-      "technologies": [
-        "Next.js",
-        "Tailwind CSS",
-        "DaisyUI",
-        "Better Auth",
-        "React Hook Form"
-      ],
-      "features": [
-        "Google social login",
-        "Real-time course search by title",
-        "Dynamic ranking algorithms (Trending & Top-Rated sections)",
-        "Robust form validation"
-      ],
-      "challenges": "Handling dynamic ranking and ensuring secure social authentication.",
-      "solutions": "Deployed custom server-side ranking algorithms and implemented Better Auth library for robust security.",
-      "image": "https://i.ibb.co.com/20c0gJm3/skillsphere.png",
-      "github": "https://github.com/munaimpro/programming-hero-assignment-8",
-      "liveUrl": "https://skill-sphere-munaimpro.vercel.app"
     }
   ],
   "education": [
@@ -214,6 +194,94 @@
     }
   ],
   "messages": [
+    {
+      "id": "msg-1781350945553",
+      "name": "Raju Ahmed",
+      "email": "admin@example.com",
+      "subject": "Test message",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T11:42:25.553Z"
+    },
+    {
+      "id": "msg-1781350358218",
+      "name": "Raju Ahmed",
+      "email": "admin@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T11:32:38.218Z"
+    },
+    {
+      "id": "msg-1781349547313",
+      "name": "Raju Ahmed",
+      "email": "raju@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T11:19:07.313Z"
+    },
+    {
+      "id": "msg-1781349213593",
+      "name": "Raju Ahmed",
+      "email": "raju@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T11:13:33.593Z"
+    },
+    {
+      "id": "msg-1781348436642",
+      "name": "Raju Ahmed",
+      "email": "admin@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T11:00:36.642Z"
+    },
+    {
+      "id": "msg-1781348305602",
+      "name": "Raju Ahmed",
+      "email": "admin@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T10:58:25.602Z"
+    },
+    {
+      "id": "msg-1781348219627",
+      "name": "Raju Ahmed",
+      "email": "raju@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here. Message text will be go here.",
+      "timestamp": "2026-06-13T10:56:59.627Z"
+    },
+    {
+      "id": "msg-1781347209090",
+      "name": "Raju Ahmed",
+      "email": "raju@gmail.com",
+      "subject": "Test message from DeepSite",
+      "message": "I need your help on Machine Learning. Please contact me ASAP. Then we will build an app together.\n\nThank you",
+      "timestamp": "2026-06-13T10:40:09.090Z"
+    },
+    {
+      "id": "msg-1781346477990",
+      "name": "Munaim Khan",
+      "email": "munaim@gmail.com",
+      "subject": "Test subject",
+      "message": "Test message from munaimpro personal website",
+      "timestamp": "2026-06-13T10:27:57.990Z"
+    },
+    {
+      "id": "msg-1781343938622",
+      "name": "Munaim Khan",
+      "email": "munaim@gmail.com",
+      "subject": "Test subject",
+      "message": "Test message from DeepSite",
+      "timestamp": "2026-06-13T09:45:38.622Z"
+    },
+    {
+      "id": "msg-1781343714821",
+      "name": "Munaim",
+      "email": "test@gmail.com",
+      "subject": "Test subject",
+      "message": "Test message from munaimpro.vercel.app",
+      "timestamp": "2026-06-13T09:41:54.821Z"
+    },
     {
       "id": "msg-1780599138124",
       "name": "Raju Ahmed",

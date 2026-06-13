@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Send, Mail, MapPin, Terminal, AlertCircle, Sparkles, MessageSquare, Clock, Github, Linkedin, ExternalLink } from 'lucide-react';
 
 export default function Contact({ profile, messages, onMessageSent }) {
@@ -20,72 +21,91 @@ export default function Contact({ profile, messages, onMessageSent }) {
     setIsSending(true);
     setStatus({ type: '', text: '' });
 
+    // Retrieve EmailJS configuration from public environment variables or database.json fallbacks
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || profile?.emailjs_service_id || profile?.emailjs?.service_id || profile?.emailjs_serviceId;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || profile?.emailjs_template_id || profile?.emailjs?.template_id || profile?.emailjs_templateId;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || profile?.emailjs_public_key || profile?.emailjs?.public_key || profile?.emailjs_publicKey;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus({
+        type: 'error',
+        text: 'EmailJS not configured. Provide environment variables (VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY) or define "emailjs" inside database.json.'
+      });
+      setIsSending(false);
+      return;
+    }
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      reply_to: formData.email,
+      subject: formData.subject || 'No Subject',
+      message: formData.message,
+      to_email: profile?.email || 'khanmail2599@gmail.com',
+      to_name: profile?.name || 'Munaim Khan'
+    };
+
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      // Send directly via EmailJS browser SDK
+      await emailjs.send(serviceId, templateId, templateParams, {
+        publicKey: publicKey
       });
 
-      if (res.ok) {
-        const result = await res.json();
-        let successMsg = 'Message saved in server database log!';
-        
-        if (result.emailStatus === 'sent') {
-          successMsg = 'TRANSMITTED: Message sent directly to Munaim\'s email!';
-        } else if (result.emailStatus === 'not_configured') {
-          successMsg = 'LOGGED: Stored in server. Provide SMTP environment secrets to forward directly.';
-        } else if (result.emailStatus && result.emailStatus.startsWith('failed')) {
-          successMsg = `LOGGED: Stored on server. (Email dispatch failed: ${result.emailStatus.replace('failed: ', '')})`;
-        }
+      setStatus({ type: 'success', text: 'TRANSMITTED: Message sent directly to your email!' });
+      setFormData({ name: '', email: '', subject: '', message: '' });
 
-        setStatus({ type: 'success', text: successMsg });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        
+      // If running locally, optionally log to server message list for historical charts/sandboxes
+      try {
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
         if (onMessageSent) {
           onMessageSent();
         }
-      } else {
-        throw new Error('API server returned error');
+      } catch (backupErr) {
+        // Safe to ignore if Vercel serverless / purely static client-side
+        console.log('Local record syncer: Not running local express server, email sent successfully.');
+        
+        // Also write to local cache storage to show instantly on the client message log list
+        try {
+          const newMsg = {
+            id: `msg-${Date.now()}`,
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || 'No Subject',
+            message: formData.message,
+            timestamp: new Date().toISOString()
+          };
+          let cached = localStorage.getItem('portfolio_data');
+          let fullPortfolio = null;
+          if (cached) {
+            fullPortfolio = JSON.parse(cached);
+          }
+          if (fullPortfolio) {
+            if (!fullPortfolio.messages) fullPortfolio.messages = [];
+            fullPortfolio.messages.unshift(newMsg);
+            localStorage.setItem('portfolio_data', JSON.stringify(fullPortfolio));
+          }
+          if (onMessageSent) {
+            onMessageSent();
+          }
+        } catch (cacheErr) {
+          console.warn('Cache logging bypassed:', cacheErr);
+        }
       }
     } catch (err) {
-      console.warn('Express server contact POST failed; saving directly to client cache.', err);
-      try {
-        const newMsg = {
-          id: `msg-${Date.now()}`,
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject || 'No Subject',
-          message: formData.message,
-          timestamp: new Date().toISOString()
-        };
-
-        let cached = localStorage.getItem('portfolio_data');
-        let fullPortfolio = null;
-        if (cached) {
-          fullPortfolio = JSON.parse(cached);
-        }
-
-        if (fullPortfolio) {
-          if (!fullPortfolio.messages) fullPortfolio.messages = [];
-          fullPortfolio.messages.unshift(newMsg);
-          localStorage.setItem('portfolio_data', JSON.stringify(fullPortfolio));
-        }
-
-        setStatus({ type: 'success', text: 'Saved locally. Connect server database & SMTP for live forwarding!' });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        
-        if (onMessageSent) {
-          onMessageSent();
-        }
-      } catch (ex) {
-        setStatus({ type: 'error', text: 'Local buffer writing failed.' });
-      }
+      console.error('EmailJS send failure details:', err);
+      setStatus({ 
+        type: 'error', 
+        text: `Transmission failed: ${err.text || err.message || JSON.stringify(err)}`
+      });
     } finally {
       setIsSending(false);
       setTimeout(() => {
         setStatus({ type: '', text: '' });
-      }, 5000);
+      }, 7000);
     }
   };
 
