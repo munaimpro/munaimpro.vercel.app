@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Terminal, ExternalLink, Cpu, Workflow, Check, X, Github } from 'lucide-react';
+import { Terminal, ExternalLink, Cpu, Workflow, Check, X, Github, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
 
-export default function ProjectsPage({ projects }) {
+export default function ProjectsPage({ projects, sections, handleNavigate }) {
   const [selectedTech, setSelectedTech] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
   
@@ -34,11 +35,47 @@ export default function ProjectsPage({ projects }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-8">
+    <div className="min-h-screen bg-slate-950 text-slate-100 pt-28 pb-16 px-4 sm:px-6 md:px-8">
+      {sections && handleNavigate && (
+        <Header 
+          sections={sections} 
+          activeSection="projects" 
+          onNavigate={handleNavigate} 
+        />
+      )}
+      
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-12">
-            <h1 className="text-4xl font-bold font-display">Projects</h1>
-            <Link to="/" className="text-cyan-400 hover:text-cyan-300 font-mono">← BACK_TO_HOME</Link>
+        {/* Modern Interactive Banner */}
+        <div className="relative rounded-3xl bg-slate-900/40 border border-white/5 overflow-hidden p-6 sm:p-8 md:p-12 mb-12 shadow-2xl backdrop-blur-md">
+          {/* Neon decorative glow spots */}
+          <div className="absolute -top-12 -left-12 w-72 h-72 rounded-full bg-violet-600/10 blur-[85px] pointer-events-none" />
+          <div className="absolute -bottom-12 -right-12 w-72 h-72 rounded-full bg-cyan-600/10 blur-[85px] pointer-events-none" />
+          
+          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6 z-10">
+            <div className="space-y-3 max-w-3xl text-left">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono border border-cyan-500/20 uppercase tracking-widest leading-none font-bold">
+                SYSTEM REPOSITORY
+              </span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-white tracking-tight leading-tight">
+                Projects <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">//</span> Works
+              </h1>
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-sans font-medium">
+                A chronological showcase of full-stack solutions, containerized web applications, API services, and production layouts engineered with modern developer patterns.
+              </p>
+            </div>
+
+            {/* Back to Home Interactive CTA */}
+            <Link 
+              to="/" 
+              className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/5 hover:border-cyan-500/20 font-mono text-xs tracking-wider uppercase transition-all duration-300 group shrink-0 active:scale-95"
+            >
+              <ArrowLeft className="w-4 h-4 text-cyan-400 group-hover:-translate-x-1 transition-transform" />
+              <span>RETURN_HOME</span>
+            </Link>
+          </div>
+          
+          {/* Asymmetric indicator wire-frame details */}
+          <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-violet-600/40 via-cyan-500/40 to-indigo-500/40 opacity-70" />
         </div>
 
         <div className="flex flex-wrap gap-2 mb-12">

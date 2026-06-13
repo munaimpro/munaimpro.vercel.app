@@ -13,7 +13,7 @@ export default function Hero({ profile, onScrollDown }) {
 
       <div className="w-full max-w-5xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Right column - Avatar Photo & Hologram Display (moved to top for mobile) */}
-        <div className="lg:col-span-5 order-first lg:order-last flex justify-center items-center">
+        <div className="lg:col-span-5 order-first lg:order-last flex justify-center items-center my-8 lg:my-0">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -33,7 +33,7 @@ export default function Hero({ profile, onScrollDown }) {
                 <img
                   src={profile.avatar}
                   alt={profile.name}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale contrast-125 saturate-50 group-hover:grayscale-0 group-hover:saturate-100"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter contrast-125 saturate-100 md:grayscale md:saturate-50 md:group-hover:grayscale-0 md:group-hover:saturate-100"
                   referrerPolicy="no-referrer"
                 />
                 
@@ -107,20 +107,20 @@ export default function Hero({ profile, onScrollDown }) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
-            className="flex flex-wrap gap-4 pt-2"
+            className="flex flex-row w-full sm:w-auto gap-3 sm:gap-4 pt-2"
           >
             <button 
               onClick={() => onScrollDown('mongo')}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-xs tracking-wider uppercase cursor-pointer shadow-[0_4px_20px_rgba(124,58,237,0.3)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] transition-all duration-300 transform hover:-translate-y-0.5"
+              className="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-cyan-500 hover:from-violet-500 hover:to-cyan-400 text-white font-medium text-[10px] sm:text-xs tracking-wider uppercase cursor-pointer shadow-[0_4px_20px_rgba(124,58,237,0.3)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] transition-all duration-300 transform hover:-translate-y-0.5 text-center"
             >
               Download CV
             </button>
             <button
               onClick={() => onScrollDown('projects')}
-              className="px-6 py-3 rounded-full glassmorphism text-slate-200 hover:text-white hover:bg-white/10 font-medium text-xs tracking-wider uppercase cursor-pointer border border-white/10 transition-all duration-300 flex items-center gap-2"
+              className="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-full glassmorphism text-slate-200 hover:text-white hover:bg-white/10 font-medium text-[10px] sm:text-xs tracking-wider uppercase cursor-pointer border border-white/10 transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2 text-center"
             >
-              Browse Works
-              <ArrowDown className="w-3.5 h-3.5 text-cyan-400 animate-bounce" />
+              <span>Browse Works</span>
+              <ArrowDown className="w-3.5 h-3.5 text-cyan-400 animate-bounce shrink-0" />
             </button>
           </motion.div>
         </div>

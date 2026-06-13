@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Database, Terminal, Cpu, ExternalLink } from 'lucide-react';
 import HomePage from './pages/index';
 import ProjectsPage from './pages/projects';
 import fallbackData from './database.json';
 
-export default function App() {
+function AppContent() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +18,7 @@ export default function App() {
     { id: 'projects', label: 'Deployments', number: '02' },
     { id: 'experience', label: 'Experience', number: '03' },
     { id: 'education', label: 'Education', number: '04' },
-    { id: 'mongo', label: 'Message', number: '05' }
+    { id: 'contact', label: 'Message', number: '05' }
   ];
 
   const fetchDatabase = async () => {
@@ -65,15 +67,31 @@ export default function App() {
     fetchDatabase();
   }, []);
 
+  // Listen for navigation state from projects page to smoothly scroll on homepage mount
+  useEffect(() => {
+    if (location.state && location.state.scrollTo) {
+      const id = location.state.scrollTo;
+      // Clear navigation state to prevent scroll trigger on future manual reloads
+      navigate(location.pathname, { replace: true, state: {} });
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          setActiveSection(id);
+        }
+      }, 150);
+    }
+  }, [location, navigate]);
+
   const handleNavigate = (id) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
       setActiveSection(id);
     } else {
-      // If we are not on "/", navigate to root first, then scroll
+      // If we are not on "/", navigate to root first, then scroll via router state
       if (window.location.pathname !== '/') {
-        window.location.href = `/#${id}`;
+        navigate('/', { state: { scrollTo: id } });
       }
     }
   };
@@ -125,32 +143,38 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative font-sans selection:bg-violet-600/30 selection:text-cyan-200 overflow-x-hidden antialiased">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_30%,#000_70%,transparent_100%)] pointer-events-none -z-20" />
-        
-        <Routes>
-          <Route path="/" element={<HomePage {...sharedProps} />} />
-          <Route path="/projects" element={<ProjectsPage {...sharedProps} />} />
-        </Routes>
-        
-        <footer className="w-full py-10 glassmorphism border-t border-white/5 mt-auto relative overflow-hidden">
-          <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-            <div className="flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-cyan-400 animate-pulse" />
-              <span>EXPRESS-JSON DATABASE SHELL ACTIVE @ 2026</span>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
-                GITHUB_CORE <ExternalLink className="w-3 h-3 text-cyan-400" />
-              </a>
-              <span>•</span>
-              <span className="text-violet-400 font-bold">MUNAIM KHAN DEVELOPER SHELL</span>
-            </div>
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col relative font-sans selection:bg-violet-600/30 selection:text-cyan-200 overflow-x-hidden antialiased">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_30%,#000_70%,transparent_100%)] pointer-events-none -z-20" />
+      
+      <Routes>
+        <Route path="/" element={<HomePage {...sharedProps} />} />
+        <Route path="/projects" element={<ProjectsPage {...sharedProps} />} />
+      </Routes>
+      
+      <footer className="w-full py-10 glassmorphism border-t border-white/5 mt-auto relative overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+          <div className="flex items-center gap-2">
+            <Cpu className="w-4 h-4 text-cyan-400 animate-pulse" />
+            <span>© {new Date().getFullYear()} Munaim Khan. All Copyright Reserved.</span>
           </div>
-        </footer>
-      </div>
+
+          <div className="flex items-center gap-4">
+            <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
+              GitHub <ExternalLink className="w-3 h-3 text-cyan-400" />
+            </a>
+            <span>•</span>
+            <span className="text-violet-400 font-bold">Full-Stack Portfolio</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }

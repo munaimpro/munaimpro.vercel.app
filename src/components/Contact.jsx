@@ -28,10 +28,20 @@ export default function Contact({ profile, messages, onMessageSent }) {
       });
 
       if (res.ok) {
-        setStatus({ type: 'success', text: 'Collection item saved, appended to database!' });
+        const result = await res.json();
+        let successMsg = 'Message saved in server database log!';
+        
+        if (result.emailStatus === 'sent') {
+          successMsg = 'TRANSMITTED: Message sent directly to Munaim\'s email!';
+        } else if (result.emailStatus === 'not_configured') {
+          successMsg = 'LOGGED: Stored in server. Provide SMTP environment secrets to forward directly.';
+        } else if (result.emailStatus && result.emailStatus.startsWith('failed')) {
+          successMsg = `LOGGED: Stored on server. (Email dispatch failed: ${result.emailStatus.replace('failed: ', '')})`;
+        }
+
+        setStatus({ type: 'success', text: successMsg });
         setFormData({ name: '', email: '', subject: '', message: '' });
         
-        // Triggers re-fetching or updating of state in main App
         if (onMessageSent) {
           onMessageSent();
         }
@@ -39,7 +49,7 @@ export default function Contact({ profile, messages, onMessageSent }) {
         throw new Error('API server returned error');
       }
     } catch (err) {
-      console.warn('Express server contact POST failed; simulated with client save fallback.', err);
+      console.warn('Express server contact POST failed; saving directly to client cache.', err);
       try {
         const newMsg = {
           id: `msg-${Date.now()}`,
@@ -62,19 +72,20 @@ export default function Contact({ profile, messages, onMessageSent }) {
           localStorage.setItem('portfolio_data', JSON.stringify(fullPortfolio));
         }
 
-        setStatus({ type: 'success', text: 'Collection item saved in local cache!' });
+        setStatus({ type: 'success', text: 'Saved locally. Connect server database & SMTP for live forwarding!' });
         setFormData({ name: '', email: '', subject: '', message: '' });
+        
         if (onMessageSent) {
           onMessageSent();
         }
       } catch (ex) {
-        setStatus({ type: 'error', text: 'Client storage full or disabled.' });
+        setStatus({ type: 'error', text: 'Local buffer writing failed.' });
       }
     } finally {
       setIsSending(false);
       setTimeout(() => {
         setStatus({ type: '', text: '' });
-      }, 4000);
+      }, 5000);
     }
   };
 
@@ -218,6 +229,8 @@ export default function Contact({ profile, messages, onMessageSent }) {
                 {profile?.email && (
                   <a
                     href={`mailto:${profile.email}`}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex items-center gap-3.5 p-3 rounded-xl bg-white/5 border border-white/5 hover:border-violet-500/30 hover:bg-white/10 transition-all font-mono text-xs text-slate-300 hover:text-white cursor-pointer group"
                   >
                     <div className="w-8 h-8 rounded-lg bg-violet-600/10 flex items-center justify-center border border-white/5 group-hover:border-violet-500/20">

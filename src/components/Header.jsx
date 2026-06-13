@@ -48,7 +48,7 @@ export default function Header({ sections, activeSection, onNavigate }) {
         <div className="hidden sm:flex items-center gap-3">
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 text-[10px] font-mono border border-emerald-500/20">
             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
-            MONGODB_CONNECTED
+            DATABASE_CONNECTED
           </div>
         </div>
 
@@ -97,10 +97,10 @@ export default function Header({ sections, activeSection, onNavigate }) {
           ))}
 
           <div className="mt-2 pt-3 border-t border-white/5 flex items-center justify-between px-2">
-            <span className="text-[9px] font-mono text-slate-500">MERCER_CLUSTER@2026</span>
+            <span className="text-[9px] font-mono text-slate-500">PORTFOLIO_SYNC</span>
             <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-mono border border-emerald-500/15">
               <span className="w-1 h-1 bg-emerald-400 rounded-full animate-ping" />
-              ONLINE_PORT_S
+              CONNECTED
             </div>
           </div>
         </div>

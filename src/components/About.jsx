@@ -147,16 +147,16 @@ export default function About({ about, projects }) {
             </div>
 
             {/* Quick stats board */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="glassmorphism rounded-xl p-3 text-center border border-white/5">
+            <div className="flex flex-col gap-3">
+              <div className="glassmorphism rounded-xl p-3 text-center border border-white/5 flex flex-col justify-center items-center">
                 <span className="text-[10px] font-mono text-slate-500 block">PROJECTS BUILT</span>
                 <span className="font-display font-bold text-xl text-white">{(projects.length > 0 ? projects.length - 1 : 0) + '+'}</span>
               </div>
-              <div className="glassmorphism rounded-xl p-3 text-center border border-white/5">
+              <div className="glassmorphism rounded-xl p-3 text-center border border-white/5 flex flex-col justify-center items-center">
                 <span className="text-[10px] font-mono text-slate-500 block">TECHNOLOGIES</span>
                 <span className="font-display font-bold text-xl text-cyan-400">{(about.skills.length > 0 ? about.skills.length - 1 : 0) + '+'}</span>
               </div>
-              <div className="glassmorphism rounded-xl p-3 text-center border border-white/5">
+              <div className="glassmorphism rounded-xl p-3 text-center border border-white/5 flex flex-col justify-center items-center">
                 <span className="text-[10px] font-mono text-slate-500 block">SPECIALIZATION</span>
                 <span className="font-display font-bold text-xl text-violet-400 text-sm">Full-Stack Web</span>
               </div>
