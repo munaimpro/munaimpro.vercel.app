@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Database, Terminal, Cpu, ExternalLink } from 'lucide-react';
+import { Database, Terminal, Cpu, ExternalLink, ArrowUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import HomePage from './pages/index';
 import ProjectsPage from './pages/projects';
 import fallbackData from './database.json';
@@ -12,6 +13,8 @@ function AppContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeSection, setActiveSection] = useState('hero');
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const sections = [
     { id: 'about', label: 'Skills', number: '01' },
@@ -66,6 +69,31 @@ function AppContent() {
   useEffect(() => {
     fetchDatabase();
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+      
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // initial trigger
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Listen for navigation state from projects page to smoothly scroll on homepage mount
   useEffect(() => {
@@ -167,6 +195,56 @@ function AppContent() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Back to Top Button with Dynamic Progress Ring */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, y: 24, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.8 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
+            onClick={scrollToTop}
+            id="back-to-top-btn"
+            className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-slate-900/90 text-cyan-400 flex items-center justify-center hover:text-white border border-white/5 shadow-[0_4px_24px_rgba(34,211,238,0.25)] hover:shadow-[0_4px_28px_rgba(139,92,246,0.35)] transition-all scroll-smooth group cursor-pointer focus:outline-none"
+            aria-label="Back to Top"
+            title="Back to top"
+          >
+            {/* Smooth SVG Progress Circle indicator */}
+            <svg className="absolute top-0 left-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 48 48">
+              <circle
+                cx="24"
+                cy="24"
+                r="22"
+                stroke="rgba(139, 92, 246, 0.12)"
+                strokeWidth="2.5"
+                fill="transparent"
+              />
+              <circle
+                cx="24"
+                cy="24"
+                r="22"
+                stroke="url(#back-to-top-progress-gradient)"
+                strokeWidth="2.5"
+                fill="transparent"
+                strokeDasharray="138.2"
+                strokeDashoffset={138.2 - (scrollProgress / 100) * 138.2}
+                strokeLinecap="round"
+                className="transition-all duration-100 ease-out"
+              />
+              <defs>
+                <linearGradient id="back-to-top-progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#7c3aed" />
+                  <stop offset="100%" stopColor="#06b6d4" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
+            <ArrowUp className="w-5 h-5 relative z-10 transition-transform group-hover:-translate-y-0.5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

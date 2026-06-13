@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import nodemailer from "nodemailer";
 import { createServer as createViteServer } from "vite";
 
 async function startServer() {
