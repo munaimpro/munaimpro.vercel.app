@@ -11,7 +11,7 @@
   /* Glassmorphism custom classes with original dark theme values */
   .glassmorphism {
     background: rgba(17, 24, 39, 0.55);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
