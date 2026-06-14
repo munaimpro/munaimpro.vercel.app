@@ -5,6 +5,17 @@ export default function Experience({ experience }) {
   if (!experience) return null;
   const [activeItem, setActiveItem] = useState(0);
 
+  const getCompanyUrl = () => {
+    const companyName = (experience[activeItem]?.company || '').toLowerCase();
+    if (companyName.includes('artsoft') || companyName.includes('art-soft')) {
+      return 'https://artsoftitbd.com';
+    }
+    if (companyName.includes('kostokomai')) {
+      return 'https://kostokomai.com';
+    }
+    return null;
+  };
+
   return (
     <section id="experience" className="relative py-20 overflow-hidden">
       {/* Visual lighting background overlay */}
@@ -90,9 +101,22 @@ export default function Experience({ experience }) {
                   <Activity className="w-3.5 h-3.5 text-violet-400 animate-spin" />
                   ID_NODE: exp-{activeItem + 1}
                 </span>
-                <span className="text-slate-400 flex items-center gap-0.5">
-                  SYSTEM_INTEGRID <ArrowUpRight className="w-3 h-3 text-cyan-400" />
-                </span>
+                {getCompanyUrl() ? (
+                  <a
+                    href={getCompanyUrl()}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-slate-400 hover:text-white flex items-center gap-1 transition-all duration-300 group cursor-pointer"
+                    title={`Visit ${experience[activeItem].company} Website`}
+                  >
+                    SYSTEM_INTEGRID{' '}
+                    <ArrowUpRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  </a>
+                ) : (
+                  <span className="text-slate-400 flex items-center gap-0.5">
+                    SYSTEM_INTEGRID <ArrowUpRight className="w-3.5 h-3.5 text-cyan-400" />
+                  </span>
+                )}
               </div>
             </div>
           </div>

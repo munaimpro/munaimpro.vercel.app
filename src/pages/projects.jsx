@@ -45,37 +45,65 @@ export default function ProjectsPage({ projects, sections, handleNavigate }) {
       )}
       
       <div className="max-w-7xl mx-auto">
-        {/* Modern Interactive Banner */}
-        <div className="relative rounded-3xl bg-slate-900/40 border border-white/5 overflow-hidden p-6 sm:p-8 md:p-12 mb-12 shadow-2xl backdrop-blur-md">
-          {/* Neon decorative glow spots */}
-          <div className="absolute -top-12 -left-12 w-72 h-72 rounded-full bg-violet-600/10 blur-[85px] pointer-events-none" />
-          <div className="absolute -bottom-12 -right-12 w-72 h-72 rounded-full bg-cyan-600/10 blur-[85px] pointer-events-none" />
+        {/* High-Tech Futuristic Interactive Banner */}
+        <div className="relative rounded-3xl bg-slate-900/30 border border-white/5 overflow-hidden p-8 sm:p-10 md:p-12 mb-12 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)] backdrop-blur-xl group/banner">
+          {/* Subtle grid mesh background */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
           
-          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6 z-10">
-            <div className="space-y-3 max-w-3xl text-left">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono border border-cyan-500/20 uppercase tracking-widest leading-none font-bold">
-                SYSTEM REPOSITORY
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-white tracking-tight leading-tight">
-                Projects <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">//</span> Works
+          {/* Expanding Neon atmospheric highlights */}
+          <div className="absolute top-0 left-1/4 w-[35rem] h-[35rem] rounded-full bg-violet-600/10 blur-[130px] -translate-y-1/2 pointer-events-none transition-all duration-1000 group-hover/banner:bg-violet-600/15" />
+          <div className="absolute bottom-0 right-1/4 w-[35rem] h-[35rem] rounded-full bg-cyan-500/10 blur-[130px] translate-y-1/2 pointer-events-none transition-all duration-1000 group-hover/banner:bg-cyan-500/15" />
+          
+          {/* Orbital wire-frames on background corners */}
+          <div className="absolute -top-16 -right-16 w-60 h-60 rounded-full border border-dashed border-indigo-500/10 animate-[spin_70s_linear_infinite] pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full border border-double border-cyan-400/5 animate-[spin_100s_linear_infinite_reverse] pointer-events-none" />
+
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8 z-10">
+            <div className="space-y-4 max-w-3xl text-left">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-500/10 text-violet-300 text-[10px] font-mono border border-violet-500/20 uppercase tracking-widest leading-none font-bold">
+                  PROJECTS_REPOSITORY
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-[10px] font-mono border border-cyan-500/20 uppercase tracking-widest leading-none font-bold">
+                  v2.0_STABLE
+                </span>
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl font-extrabold font-display leading-tight tracking-tight text-white">
+                Engineered{" "}
+                <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent text-glow">
+                  Solutions & Applications
+                </span>
               </h1>
-              <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-sans font-medium">
-                A chronological showcase of full-stack solutions, containerized web applications, API services, and production layouts engineered with modern developer patterns.
+              
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-sans font-medium max-w-2xl">
+                An architectural gallery of robust full-stack applications, interactive environments, API services, and production web systems built with advanced modern stacks.
               </p>
+
+              {/* Unique Console Diagnostics Line details */}
+              <div className="flex flex-wrap gap-x-6 gap-y-2 pt-3 text-[10px] font-mono text-slate-500 border-t border-white/5">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>NODE_INGRESS: ACTIVE_PIPELINES</span>
+                </div>
+                <div>// CATEGORIES: FRONTEND, BACKEND, SYSTEM_INTEGRID</div>
+              </div>
             </div>
 
             {/* Back to Home Interactive CTA */}
-            <Link 
-              to="/" 
-              className="flex items-center gap-2.5 px-5 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/5 hover:border-cyan-500/20 font-mono text-xs tracking-wider uppercase transition-all duration-300 group shrink-0 active:scale-95"
-            >
-              <ArrowLeft className="w-4 h-4 text-cyan-400 group-hover:-translate-x-1 transition-transform" />
-              <span>RETURN_HOME</span>
-            </Link>
+            <div className="flex items-center">
+              <Link 
+                to="/" 
+                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/5 hover:border-cyan-500/30 font-mono text-xs tracking-wider uppercase transition-all duration-300 group shrink-0 active:scale-95 shadow-lg shadow-black/40"
+              >
+                <ArrowLeft className="w-4 h-4 text-cyan-400 group-hover:-translate-x-1.5 transition-transform duration-300" />
+                <span>RETURN_TO_CORE</span>
+              </Link>
+            </div>
           </div>
           
-          {/* Asymmetric indicator wire-frame details */}
-          <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-violet-600/40 via-cyan-500/40 to-indigo-500/40 opacity-70" />
+          {/* Asymmetric indicator wire-frame bottom detailed lines */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-600/40 via-cyan-500/40 to-indigo-500/40 opacity-70" />
         </div>
 
         <div className="flex flex-wrap gap-2 mb-12">
@@ -90,7 +118,7 @@ export default function ProjectsPage({ projects, sections, handleNavigate }) {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {filteredProjects.map((project, idx) => {
              const projectFeatures = getProjectFeatures(project);
              return (

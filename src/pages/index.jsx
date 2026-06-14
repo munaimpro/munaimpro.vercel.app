@@ -47,7 +47,7 @@ export default function HomePage({ data, handleNavigate, setActiveSection, secti
         <About about={data.about} projects={data.projects} />
         
         <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent w-full" />
-        <Projects projects={data.projects} />
+        <Projects projects={data.projects ? data.projects.slice(-4) : []} totalProjects={data.projects ? data.projects.length : 0} />
         
         <div className="h-px bg-gradient-to-r from-transparent via-white/5 to-transparent w-full" />
         <Experience experience={data.experience} />

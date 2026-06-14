@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Database, Terminal, Cpu, ExternalLink, ArrowUp } from 'lucide-react';
+import { Database, Terminal, Cpu, ExternalLink, ArrowUp, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import HomePage from './pages/index';
 import ProjectsPage from './pages/projects';
@@ -25,20 +25,31 @@ function AppContent() {
   ];
 
   const fetchDatabase = async () => {
+    const startTime = Date.now();
+    const MIN_LOAD_TIME = 2200; // Implemented 2.2s visible welcome timing
     try {
       const res = await fetch('/api/portfolio');
-      if (!res.ok) {
+      let fetchedData = null;
+      if (res.ok) {
+        fetchedData = await res.json();
+      } else {
         throw new Error('Database response was not OK');
       }
-      const json = await res.json();
-      setData(json);
-      try {
-        localStorage.setItem('portfolio_data', JSON.stringify(json));
-      } catch (e) {
-        console.warn('Storage quota or storage access error:', e);
-      }
-      setError(null);
-      setLoading(false);
+
+      const elapsed = Date.now() - startTime;
+      const remainingTime = Math.max(0, MIN_LOAD_TIME - elapsed);
+
+      setTimeout(() => {
+        setData(fetchedData);
+        try {
+          localStorage.setItem('portfolio_data', JSON.stringify(fetchedData));
+        } catch (e) {
+          console.warn('Storage quota or storage access error:', e);
+        }
+        setError(null);
+        setLoading(false);
+      }, remainingTime);
+
     } catch (err) {
       console.warn('Backend server database port query failed; falling back to client-saved state.');
       
@@ -53,16 +64,21 @@ function AppContent() {
         console.warn('Could not read from local storage cache:', e);
       }
 
-      if (localPayload) {
-        setData(localPayload);
-        setError(null);
-      } else if (fallbackData) {
-        setData(fallbackData);
-        setError(null);
-      } else {
-        setError(err.message || 'Failed connecting to database port');
-      }
-      setLoading(false);
+      const elapsed = Date.now() - startTime;
+      const remainingTime = Math.max(0, MIN_LOAD_TIME - elapsed);
+
+      setTimeout(() => {
+        if (localPayload) {
+          setData(localPayload);
+          setError(null);
+        } else if (fallbackData) {
+          setData(fallbackData);
+          setError(null);
+        } else {
+          setError(err.message || 'Failed connecting to database port');
+        }
+        setLoading(false);
+      }, remainingTime);
     }
   };
 
@@ -128,7 +144,7 @@ function AppContent() {
     setData(updatedData);
   };
 
-  // If loading or error, show system screen
+  // If loading, show previous system style loading screen with custom welcome text
   if (loading) {
     return (
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center font-mono text-xs text-indigo-400 p-4 space-y-4">
@@ -136,7 +152,7 @@ function AppContent() {
           <div className="absolute inset-0 rounded-full border border-violet-500/20 border-t-violet-400 border-r-violet-400 animate-spin" />
           <Database className="w-5 h-5 text-cyan-400 animate-pulse" />
         </div>
-        <p className="tracking-widest animate-pulse"># QUERYING_LOCAL_DATABASE.JSON ...</p>
+        <p className="tracking-widest animate-pulse">&lt;Hello world/&gt;</p>
       </div>
     );
   }

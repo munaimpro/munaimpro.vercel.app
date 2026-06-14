@@ -237,8 +237,8 @@ export default function Contact({ profile, messages, onMessageSent }) {
                   <div>
                     <h4 className="text-sm font-semibold text-white font-sans">{profile.name}</h4>
                     <p className="text-[11px] font-mono text-slate-400">{profile.title}</p>
-                    <span className="text-[8px] font-mono px-1.5 py-0.5 mt-1 bg-white/5 border border-white/10 rounded text-cyan-400 inline-block uppercase">
-                      ONLINE // SECURE_LINE
+                    <span className="text-[8px] font-mono px-1.5 py-0.5 mt-1 bg-emerald-500/10 border border-emerald-500/20 rounded text-emerald-400 inline-block uppercase">
+                      AVAILABLE FOR COLLABORATION
                     </span>
                   </div>
                 </div>

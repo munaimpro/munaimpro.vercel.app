@@ -168,9 +168,8 @@ export default function About({ about, projects }) {
             <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
               <div className="flex items-center gap-2">
                 <Hammer className="w-4 h-4 text-cyan-400" />
-                <span className="text-xs font-mono text-slate-300 uppercase tracking-wide">Developer Toolbox</span>
+                <span className="text-xs font-mono text-slate-300 uppercase tracking-wide">My Engineering Arsenal</span>
               </div>
-              <span className="text-[11px] font-mono text-slate-500 hidden sm:inline">NODES_INDEX</span>
             </div>
 
             {/* Filter Tabs */}
@@ -185,7 +184,7 @@ export default function About({ about, projects }) {
                       : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
                   }`}
                 >
-                  {cat === 'All' ? 'ALL_NODES' : cat.toUpperCase()}
+                  {cat === 'All' ? 'ALL' : cat.toUpperCase()}
                 </button>
               ))}
             </div>
@@ -233,12 +232,6 @@ export default function About({ about, projects }) {
                   </div>
                 );
               })}
-            </div>
-
-            {/* Micro details indicator */}
-            <div className="mt-6 flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-500/5 text-yellow-400/85 text-[10px] font-mono border border-yellow-500/10">
-              <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-              <span>Technology index matched dynamically to the local MongoDB database layout schema container.</span>
             </div>
           </div>
 

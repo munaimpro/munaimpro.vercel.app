@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Database, Save, RefreshCw, AlertCircle, CheckCircle2, Server, HelpCircle, Code, Layers, MessageSquare } from 'lucide-react';
+import { Database, Code } from 'lucide-react';
 
 export default function MongoSandbox({ initialData, onDataSynced }) {
   const [collections, setCollections] = useState(() => {
@@ -152,12 +152,6 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
           
           {/* Main query workspace - Code Editor on the left */}
           <div className="lg:col-span-8 flex flex-col justify-between glassmorphism rounded-2xl border border-white/8 bg-slate-950/75 p-5 shadow-2xl relative">
-            <div className="absolute top-4 right-4 flex items-center gap-2">
-              <span className="text-[10px] font-mono text-slate-500 bg-white/5 border border-white/5 px-2 py-0.5 rounded">
-                PORTFOLIO_DB
-              </span>
-            </div>
-
             <div className="flex flex-col h-full">
               {/* Database Tab Switchers - Kept only db.portfolio.json */}
               <div className="flex items-center gap-1 pb-3 mb-4 border-b border-white/5">
@@ -171,9 +165,8 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
                 <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 mb-1.5 px-1">
                   <div className="flex items-center gap-1.5">
                     <Code className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>read_only_schema.json</span>
+                    <span>schema.json</span>
                   </div>
-                  <span>secured_query_view</span>
                 </div>
 
                 <div className="relative rounded-xl overflow-hidden border border-white/5 h-80 min-h-[22rem]">
@@ -206,7 +199,7 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
               {/* Secured Read Only status indicator */}
               <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/5 font-mono text-[10px] text-slate-500">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>DATABASE CORE IN READ-ONLY STATE // COPY SELECTION SECURED</span>
+                <span>LOCAL DATABASE INSTANCE // INTEGRATED</span>
               </div>
             </div>
           </div>
@@ -218,7 +211,7 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
             <div className="glassmorphism rounded-2xl p-5 border border-white/8 bg-slate-950/75 flex-1 flex flex-col justify-between text-left shadow-2xl">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-slate-500 uppercase">JSON Database Core Metrics</span>
+                  <span className="text-[10px] font-mono text-slate-500 uppercase">Database Core Metrics</span>
                   <Database className="w-4 h-4 text-emerald-400" />
                 </div>
                 
@@ -240,12 +233,6 @@ export default function MongoSandbox({ initialData, onDataSynced }) {
                     <span className="text-cyan-400">{(initialData?.messages?.length || 0)} log entries</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Tiny helpful tutorial tip */}
-              <div className="mt-6 flex gap-2 p-2.5 rounded-xl bg-violet-600/10 text-[10px] font-sans leading-relaxed text-violet-300 border border-violet-500/10">
-                <HelpCircle className="w-4 h-4 text-violet-400 shrink-0 mt-0.5" />
-                <span>Modifying properties in the JSON editor on the left and choosing 'Sync Live DB' immediately alters the entire layout of this website! Try editing the name or titles.</span>
               </div>
             </div>
 

@@ -18,7 +18,7 @@ import {
   Workflow
 } from 'lucide-react';
 
-export default function Projects({ projects }) {
+export default function Projects({ projects, totalProjects }) {
   if (!projects) return null;
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -126,7 +126,7 @@ export default function Projects({ projects }) {
           </div>
           <div className="hidden lg:flex items-center gap-2 text-[10px] font-mono text-slate-500 bg-slate-900/50 px-3 py-1.5 rounded-lg border border-white/5">
             <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-            <span>MAPPED CORE: 3 REPOSITORIES ACTIVE</span>
+            <span>MAPPED CORE: {totalProjects || projects.length} REPOSITORIES ACTIVE</span>
           </div>
         </div>
 

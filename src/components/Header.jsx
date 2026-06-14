@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Database, Menu, X, ArrowUpRight, Compass, Sparkles } from 'lucide-react';
 
 export default function Header({ sections, activeSection, onNavigate }) {
   const [isOpen, setIsOpen] = useState(false); // Mobile responsive hamburger menu
   const [isCompassOpen, setIsCompassOpen] = useState(false); // Compass dropdown (Universal for all screens)
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setIsCompassOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
 
   const handleLinkClick = (id) => {
     setIsOpen(false);
@@ -12,7 +29,7 @@ export default function Header({ sections, activeSection, onNavigate }) {
   };
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] sm:w-[90%] max-w-5xl z-50 transition-all duration-300">
+    <header ref={headerRef} className="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] sm:w-[90%] max-w-5xl z-50 transition-all duration-300">
       {/* Primary Bar Custom Glass Panel */}
       <div className="glassmorphism rounded-full px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative">
         
@@ -24,7 +41,7 @@ export default function Header({ sections, activeSection, onNavigate }) {
                 <Database className="w-3.5 h-3.5 text-cyan-400 group-hover:text-violet-400 transition-colors duration-300" />
               </div>
             </div>
-            <span className="font-display font-bold tracking-tight text-white text-xs sm:text-sm">
+            <span className="font-display font-bold tracking-tight text-white text-base sm:text-lg">
               Munaim Khan
             </span>
           </div>
@@ -97,8 +114,8 @@ export default function Header({ sections, activeSection, onNavigate }) {
       {/* Floating Glass Dropdown Menu on mobile devices for section listing */}
       {isOpen && (
         <div className="absolute top-[110%] left-0 right-0 glassmorphism rounded-2xl p-4 border border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl animate-[fadeIn_0.2s_ease-out] flex flex-col gap-2 z-50">
-          <div className="text-[10px] font-mono text-slate-500 tracking-wider pb-2 border-b border-white/5 mb-1 px-2 uppercase">
-            Cluster Port Node list
+          <div className="text-[10px] font-mono text-slate-400 tracking-wider pb-2 border-b border-white/5 mb-1 px-2 uppercase">
+            Portfolio Navigation
           </div>
           
           {sections.map((sec) => (
@@ -121,13 +138,7 @@ export default function Header({ sections, activeSection, onNavigate }) {
             </button>
           ))}
 
-          <div className="mt-2 pt-3 border-t border-white/5 flex items-center justify-between px-2">
-            <span className="text-[9px] font-mono text-slate-500">PORTFOLIO_SYNC</span>
-            <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-mono border border-emerald-500/15">
-              <span className="w-1 h-1 bg-emerald-400 rounded-full animate-ping" />
-              CONNECTED
-            </div>
-          </div>
+          {/* Removed PORTFOLIO_SYNC CONNECTED block as requested */}
         </div>
       )}
 
