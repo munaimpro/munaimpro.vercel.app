@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import HomePage from './pages/index';
 import ProjectsPage from './pages/projects';
 import fallbackData from './database.json';
+import { Analytics } from '@vercel/analytics/react';
 
 function AppContent() {
   const navigate = useNavigate();
@@ -269,6 +270,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <AppContent />
+      <Analytics />
     </BrowserRouter>
   );
 }
