@@ -159,6 +159,83 @@
       "image": "https://i.ibb.co.com/20c0gJm3/skillsphere.png",
       "github": "https://github.com/munaimpro/programming-hero-assignment-8",
       "liveUrl": "https://skill-sphere-munaimpro.vercel.app"
+    },
+    {
+      "id": "proj-4",
+      "title": "GitHub Issues Tracker",
+      "subtitle": "GitHub issue tracking platform",
+      "description": "An intuitive educational platform focused on smooth course discovery and student profile tracking",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "DaisyUI",
+        "Better Auth",
+        "React Hook Form"
+      ],
+      "features": [
+        "Google social login",
+        "Real-time course search by title",
+        "Dynamic ranking algorithms (Trending & Top-Rated sections)",
+        "Robust form validation"
+      ],
+      "challenges": "Handling dynamic ranking and ensuring secure social authentication.",
+      "solutions": "Deployed custom server-side ranking algorithms and implemented Better Auth library for robust security.",
+      "image": "https://i.ibb.co.com/F455jkS3/github-issue-tracker-cover.png",
+      "github": "https://github.com/munaimpro/programming-hero-assignment-5",
+      "liveUrl": "https://github-issue-tracker-munaimpro.netlify.app"
+    },
+    {
+      "id": "proj-5",
+      "title": "DigiTools",
+      "subtitle": "Online digital product selling platform",
+      "description": "An online digital product selling platform focusing on simple process of adding product to card, view cart product list, remove prouct from cart and checkout process",
+      "technologies": [
+        "Tailwind CSS",
+        "DaisyUI",
+        "React.js",
+        "JavaScript (ES6+)",
+        "React Toastify"
+      ],
+      "features": [
+        "Interactive Cart System",
+        "React Toastify is used to display alerts",
+        "View the total selected items directly from the navbar",
+        "React Toastify is used to display alerts",
+        "Fully Responsive Design"
+      ],
+      "challenges": "Handling dynamic ranking and ensuring secure social authentication.",
+      "solutions": "Deployed custom server-side ranking algorithms and implemented Better Auth library for robust security.",
+      "image": "https://i.ibb.co.com/B55Jpd50/digitools-cover.png",
+      "github": "https://github.com/munaimpro/programming-hero-assignment-6",
+      "liveUrl": "https://digitools-platform-munaimpro.netlify.app"
+    },
+    {
+      "id": "proj-6",
+      "title": "KeenKeeper",
+      "subtitle": "A Friendship Management & Interaction Tracking Web App",
+      "description": "KeenKeeper helps users keep track of meaningful relationships by logging interactions like calls, texts, and video chats. It provides a visual timeline, analytics dashboard, and friend management system to help maintain strong social connections. The project focuses on component-based architecture, state management with Context API, interactive UI, and data visualization using charts.",
+      "technologies": [
+        "React.js",
+        "React Router DOM",
+        "Tailwind CSS",
+        "DaisyUI",
+        "JavaScript (ES6+)",
+        "React Toastify",
+        "Recharts",
+        "Context API"
+      ],
+      "features": [
+        "Users can view a list of friends",
+        "Quick interaction logging",
+        "Timeline system",
+        "Friendship analytics dashboard",
+        "Friend details page"
+      ],
+      "challenges": "Handling dynamic ranking and ensuring secure social authentication.",
+      "solutions": "Deployed custom server-side ranking algorithms and implemented Better Auth library for robust security.",
+      "image": "https://i.ibb.co.com/1tJJ2G07/keen-keeper-cover.png",
+      "github": "https://github.com/munaimpro/programming-hero-assignment-7",
+      "liveUrl": "https://keen-keeper-munaimpro.netlify.app"
     }
   ],
   "education": [
